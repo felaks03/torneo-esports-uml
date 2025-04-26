@@ -1,0 +1,138 @@
+Paso 3: Identificación de Clases y Relaciones
+
+Clases de Entidad
+-----------------
+1. Torneo
+   - Descripción: Representa un torneo de eSports, como "Torneo de Verano".
+   - Atributos:
+     - nombre: String (nombre del torneo, privado)
+     - fecha: Date (fecha de inicio, privado)
+     - equipos: List<Equipo> (lista de equipos inscritos, privado)
+     - clasificaciones: Map<Equipo, Integer> (puntuaciones de equipos, privado)
+   - Métodos:
+     - agregarEquipo(Equipo): void (añade un equipo al torneo)
+     - actualizarClasificaciones(): void (actualiza las posiciones según resultados)
+     - getNombre(): String (devuelve el nombre)
+     - getFecha(): Date (devuelve la fecha)
+
+2. Equipo
+   - Descripción: Representa un equipo de jugadores, como "Dragones".
+   - Atributos:
+     - nombre: String (nombre del equipo, privado)
+     - jugadores: List<Jugador> (lista de jugadores, privado)
+   - Métodos:
+     - agregarJugador(Jugador): void (añade un jugador al equipo)
+     - getNombre(): String (devuelve el nombre)
+     - getJugadores(): List<Jugador> (devuelve la lista de jugadores)
+
+3. Jugador
+   - Descripción: Representa un jugador individual, como "Juan".
+   - Atributos:
+     - nombre: String (nombre del jugador, privado)
+     - id: int (identificador único, privado)
+   - Métodos:
+     - getNombre(): String (devuelve el nombre)
+     - getId(): int (devuelve el ID)
+
+4. Partida
+   - Descripción: Representa un partido entre dos equipos.
+   - Atributos:
+     - equipo1: Equipo (primer equipo, privado)
+     - equipo2: Equipo (segundo equipo, privado)
+     - resultado: String (resultado, como "2-0", privado)
+   - Métodos:
+     - setResultado(String): void (establece el resultado)
+     - getResultado(): String (devuelve el resultado)
+     - getEquipo1(): Equipo (devuelve el primer equipo)
+     - getEquipo2(): Equipo (devuelve el segundo equipo)
+
+5. Premio
+   - Descripción: Representa un premio otorgado, como "$100".
+   - Atributos:
+     - descripcion: String (descripción del premio, privado)
+     - valor: double (valor monetario, privado)
+   - Métodos:
+     - getDescripcion(): String (devuelve la descripción)
+     - getValor(): double (devuelve el valor)
+
+Clases de Control
+----------------
+1. GestorTorneos
+   - Descripción: Gestiona la creación e inscripción de torneos.
+   - Atributos:
+     - torneos: List<Torneo> (lista de torneos, privado)
+   - Métodos:
+     - crearTorneo(String, Date): void (crea un nuevo torneo)
+     - inscribirEquipo(Torneo, Equipo): void (inscribe un equipo en un torneo)
+     - generarEmparejamientos(Torneo): void (crea los enfrentamientos)
+
+2. GestorEquipos
+   - Descripción: Gestiona la creación y edición de equipos y jugadores.
+   - Atributos:
+     - equipos: List<Equipo> (lista de equipos, privado)
+   - Métodos:
+     - registrarEquipo(String): void (crea un nuevo equipo)
+     - agregarJugadorAEquipo(Equipo, Jugador): void (añade un jugador a un equipo)
+
+3. GestorPartidas
+   - Descripción: Gestiona las partidas y sus resultados.
+   - Atributos:
+     - partidas: List<Partida> (lista de partidas, privado)
+   - Métodos:
+     - registrarResultado(Partida, String): void (registra el resultado de una partida)
+     - actualizarClasificaciones(Torneo): void (actualiza las clasificaciones)
+
+4. GestorPremios
+   - Descripción: Gestiona la asignación de premios.
+   - Atributos:
+     - premios: List<Premio> (lista de premios, privado)
+   - Métodos:
+     - asignarPremio(Torneo, Equipo, Premio): void (asigna un premio a un equipo)
+
+Clases de Interfaz
+------------------
+1. VistaPrincipal
+   - Descripción: Maneja la interacción con el usuario (por ejemplo, menús en consola).
+   - Atributos:
+     - scanner: Scanner (para entrada de usuario, privado)
+   - Métodos:
+     - mostrarMenu(): void (muestra el menú principal)
+     - mostrarEquipos(List<Equipo>): void (muestra la lista de equipos)
+     - mostrarJugadores(List<Jugador>): void (muestra la lista de jugadores)
+
+Relaciones entre Clases
+-----------------------
+- Torneo → Equipo:
+  - Tipo: Agregación
+  - Descripción: Un torneo contiene varios equipos, pero los equipos pueden existir sin un torneo.
+  - Cardinalidad: 1 (Torneo) a * (Equipos)
+
+- Equipo → Jugador:
+  - Tipo: Composición
+  - Descripción: Un equipo está formado por jugadores, y los jugadores no existen sin su equipo.
+  - Cardinalidad: 1 (Equipo) a * (Jugadores)
+
+- Partida → Equipo:
+  - Tipo: Asociación
+  - Descripción: Una partida involucra dos equipos (equipo1 y equipo2).
+  - Cardinalidad: 1 (Partida) a 1 (equipo1), 1 (Partida) a 1 (equipo2)
+
+- GestorTorneos → Torneo:
+  - Tipo: Asociación
+  - Descripción: El gestor administra varios torneos.
+  - Cardinalidad: 1 (GestorTorneos) a * (Torneos)
+
+- GestorEquipos → Equipo:
+  - Tipo: Asociación
+  - Descripción: El gestor administra varios equipos.
+  - Cardinalidad: 1 (GestorEquipos) a * (Equipos)
+
+- GestorPartidas → Partida:
+  - Tipo: Asociación
+  - Descripción: El gestor administra varias partidas.
+  - Cardinalidad: 1 (GestorPartidas) a * (Partidas)
+
+- GestorPremios → Premio:
+  - Tipo: Asociación
+  - Descripción: El gestor administra varios premios.
+  - Cardinalidad: 1 (GestorPremios) a * (Premios)

@@ -1,0 +1,29 @@
+Paso 1: Análisis del Problema
+
+Actores:
+- Administrador: Gestiona torneos, equipos, jugadores, partidas y premios.
+- Equipo: Participa en torneos, inscribiéndose y consultando listas.
+
+Funcionalidades:
+- Administrador:
+  - Registrar un equipo
+  - Añadir un jugador a un equipo
+  - Ver lista de equipos y jugadores
+  - Crear un torneo
+  - Inscribir equipo en un torneo
+  - Generar emparejamientos de partidas
+  - Registrar resultado de una partida
+  - Actualizar clasificación del torneo
+  - Asignar premios a los ganadores
+- Equipo:
+  - Inscribir equipo en un torneo
+  - Ver lista de equipos y jugadores
+
+Respuestas:
+- Actores: Administrador, Equipo.
+- Acciones: Ver funcionalidades arriba.
+- Relaciones entre entidades:
+  - Torneo contiene equipos.
+  - Equipo contiene jugadores.
+  - Partida conecta dos equipos.
+  - Premio se asigna a un equipo.
